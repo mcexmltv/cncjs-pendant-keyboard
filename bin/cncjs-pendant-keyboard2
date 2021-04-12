@@ -52,7 +52,7 @@ if (options.list) {
     .list()
     .then(function (ports) {
       ports.forEach(function (port) {
-        console.log(port.path);
+            console.log(port.comName);
       });
     })
     .catch((err) => {
@@ -120,11 +120,11 @@ var createServer = function (options) {
       store.sender.status = data;
     });
 
-    const findPath = (interface) =>
+    const findPath = interface =>
       hid
         .devices()
         .find(
-          (item) =>
+          item =>
             item.vendorId === 26881 &&
             item.productId === 9985 &&
             item.interface === interface
@@ -316,7 +316,7 @@ serialport
   .list()
   .then(function (ports) {
     const choices = ports.map(function (port) {
-      return port.path;
+        return port.comName;
     });
 
     inquirer
