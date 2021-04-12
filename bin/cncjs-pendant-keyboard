@@ -258,8 +258,8 @@ var createServer = function(options) {
 
             console.log(kbdevent);
         }
-    });
-};
+ //   });
+// };
 
 // console.log('List of connected devices (paths): ');
 // console.log('devices:', hid.devices());
