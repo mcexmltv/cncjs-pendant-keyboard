@@ -15,19 +15,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cncjs/cncjs-pendant-boilerplate.git"
+    "url": "git+https://github.com/mcexmltv/cncjs-pendant-keyboard.git"
   },
   "keywords": [
     "cncjs",
     "pendant",
     "keyboard"
   ],
-  "author": "Cheton Wu <cheton@gmail.com>",
+  "author": "Luis Henrique <mcexmltv@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cncjs/cncjs-pendant-boilerplate/issues"
+    "url": "https://github.com/mcexmltv/cncjs-pendant-keyboard/issues"
   },
-  "homepage": "https://github.com/cncjs/cncjs-pendant-boilerplate#readme",
+  "homepage": "https://github.com/mcexmltv/cncjs-pendant-keyboard#readme",
   "dependencies": {
     "commander": "^5.0.0-4",
     "inquirer": "^7.1.0",
