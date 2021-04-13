@@ -52,7 +52,7 @@ if (options.list) {
     .list()
     .then(function (ports) {
       ports.forEach(function (port) {
-            console.log(port.comName);
+        console.log(port.path);
       });
     })
     .catch((err) => {
@@ -120,16 +120,16 @@ var createServer = function (options) {
       store.sender.status = data;
     });
 
-    const findPath = interface =>
+    const findPath = (interface) =>
       hid
         .devices()
         .find(
-          item =>
-            item.vendorId === 26881 &&
-            item.productId === 9985 &&
+          (item) =>
+                    item.vendorId === 5383 && // 26881 &&    //5383
+                         item.productId ===10260 &&  //9985 &&   //10260
             item.interface === interface
         ).path;
-
+        console.log("********************");
     console.log("Keyboard HID Address:", findPath(0), " & ", findPath(1));
     var keyboard_main = new hid.HID(findPath(0));
     var keyboard_extra = new hid.HID(findPath(1));
@@ -304,7 +304,7 @@ var createServer = function (options) {
     console.log('Type "help" to display supported options:');
 
     vorpal.delimiter("pendant$").show();
-    });
+  });
 };
 
 if (options.port) {
@@ -316,7 +316,7 @@ serialport
   .list()
   .then(function (ports) {
     const choices = ports.map(function (port) {
-        return port.comName;
+      return port.path;
     });
 
     inquirer
