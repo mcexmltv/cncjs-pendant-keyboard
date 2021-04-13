@@ -122,7 +122,7 @@ var createServer = function(options) {
                 .devices()
                 .find(
                     item =>
-                         item.vendorId === 5383 && // 26881 &&    //5383
+                         item.vendorId === 5383 && // 26881 &&    //5383  depends on HW
                          item.productId ===10260 &&  //9985 &&   //10260
                         item.interface === interface
                 ).path;
@@ -170,19 +170,20 @@ var createServer = function(options) {
             }
 
             // Process pressed key
+
             switch (kbdevent.extra) {
                 case 234: // vol+
                     socket.emit(
                         "write",
                         options.port,
-                        "G0 Z-" + kbdevent.move + ";\n"
+                        "G91\nG0 Z-" + kbdevent.move + ";\nG90\n"
                     );
                     break; 
                 case 233: // vol-
                     socket.emit(
                         "write",
                         options.port,
-                        "G0 Z" + kbdevent.move + ";\n"
+                        "G91\nG0 Z" + kbdevent.move + ";\nG90\n"
                     );
                     break;
                 case 131: // Media: Play (Top corner left)
@@ -198,7 +199,7 @@ var createServer = function(options) {
                     socket.emit(
                         "write",
                         options.port,
-                        "G10 L20 P1 X0 Y0 Z0;\n"
+                        "G10 L20 P1 X0 Y0 Z0;\n"  // ????  Fix
                     );
                     break;
                 case 148: // Key: Home -> Goto Zero-working position
@@ -207,7 +208,9 @@ var createServer = function(options) {
                 default:
                     break;
             }
+      
             switch (kbdevent.key) {
+
                 case 80: // arrow: left
                //  G91
                //  G0 X-1
@@ -215,28 +218,28 @@ var createServer = function(options) {
                     socket.emit(
                         "write",
                         options.port,
-                        "G0 X-" + kbdevent.move + ";\n"
+                        "G91\nG0 X-" + kbdevent.move + ";\nG90\n"
                     );
                     break;
                 case 79: // arrow: right
                     socket.emit(
                         "write",
                         options.port,
-                        "G0 X" + kbdevent.move + ";\n"
+                        "G0 X" + kbdevent.move + ";\nG90\n"
                     );
                     break;
                 case 82: // arrow: up
                     socket.emit(
                         "write",
                         options.port,
-                        "G0 Y" + kbdevent.move + ";\n"
+                        "G91\nG0 Y" + kbdevent.move + ";\nG90\n"
                     );
                     break;
                 case 81: // arrow: down
                     socket.emit(
                         "write",
                         options.port,
-                        "G0 Y-" + kbdevent.move + ";\n"
+                        "G91\nG0 Y-" + kbdevent.move + ";\nG90\n"
                     );
                     break;
                 case 58: // key: F1
@@ -253,6 +256,7 @@ var createServer = function(options) {
                 default:
                     break;
             }
+
 
             if (
                 (kbdevent.extra || kbdevent.key) &&
