@@ -177,7 +177,7 @@ var createServer = function(options) {
                         options.port,
                         "G0 Z-" + kbdevent.move + ";\n"
                     );
-                    break;
+                    break; 
                 case 233: // vol-
                     socket.emit(
                         "write",
