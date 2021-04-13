@@ -1,0 +1,123 @@
+TO install cncjs use https://github.com/cncjs/cncjs-pi-raspbian  Then  go down to Pendant install
+
+git clone https://github.com/cncjs/cncjs-pendant-keyboard.git ~/.pendant
+          https://github.com/cncjs/cncjs-pendant-keyboard.git
+
+gh repo clone cncjs/cncjs-pendant-keyboard
+
+
+ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
+
+
+echo 'export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm ' >>~/.bash_profile
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+
+sudo apt-get install libudev-dev
+================================
+
+Install script
+
+# Install Node.js and NPM
+
+sudo apt-get update
+
+sudo apt-get install nodejs
+
+sudo apt-get install npm
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+
+
+??? reboot
+
+
+export NVM_DIR="$HOME/.nvm"
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+nvm install 10 && nvm use 10    // 9
+////
+ sudo npm i react -g
+sudo npm i react-datepicker -g
+
+##   CNC JS
+npm install -g cncjs
+
+or 
+sudo npm install -g cncjs@latest --unsafe-perm
+
+# Install PM2
+sudo npm install -g pm2
+
+# Setup PM2 Startup Script
+# sudo pm2 startup  # To Start PM2 as root
+pm2 startup  # To start PM2 as pi / current user
+  #[PM2] You have to run this command as root. Execute the following command:
+##  sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
+  sudo env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
+                              /usr/local/lib/node_modules/pm2/bin/pm2
+ 
+
+# Start CNCjs (on port 8000, /w Tinyweb mount point) with PM2
+# pm2 start $(which cncjs) -- --port 8000 -m /tinyweb:/home/pi/tinyweb
+pm2 start " sudo $(which cncjs) -- --port 8000 -m /tinyweb:/home/pi/tinyweb"
+
+# Set current running apps to startup
+pm2 save
+
+# Get list of PM2 processes
+pm2 list
+
+
+=======================
+# Iptables (allow access to port 8000 from port 80)
+sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8000
+
+# Make Iptables Persistent
+sudo apt-get install iptables-persistent -y
+
+# How-to: Save & Reload Rules
+#sudo netfilter-persistent save
+#sudo netfilter-persistent reload
+
+# How-to: Manually Save Rules
+#sudo sh -c "iptables-save > /etc/iptables/rules.v4"
+#sudo sh -c "ip6tables-save > /etc/iptables/rules.v6"
+
+# Run this if issues to reconfigure iptables-persistent
+# sudo dpkg-reconfigure iptables-persistent
+
+
+
+
+
+INSTALL PENDANT
+### install required files  for pendant
+
+sudo apt-get install libusb-1.0-0-dev libudev-dev
+ 
+sudo npm install node-hid@0 --driver=hidraw --build-from-source --unsafe-perm
+ 
+sudo npm install serialport@4ou5  --build-from-source --unsafe-perm
+# git clone https://github.com/cncjs/cncjs-pendant-keyboard.git ~/.pendant
+git clone https://github.com/mcexmltv/cncjs-pendant-keyboard.git ~/.pendant
+
+cd .pendant
+
+
+# install 
+  npm install
+
+
+# pm2 start "node /home/pi/.pendant/bin/cncjs-pendant-keyboard --port /dev/ttyAMA0"
+pm2 start "sudo node /home/pi/.pendant/bin/cncjs-pendant-keyboard --port /dev/ttyUSB0"
+
+
+
+
