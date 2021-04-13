@@ -175,14 +175,14 @@ var createServer = function(options) {
                     socket.emit(
                         "write",
                         options.port,
-                        "G91 Z-" + kbdevent.move + ";\n"
+                        "G0 Z-" + kbdevent.move + ";\n"
                     );
                     break;
                 case 233: // vol-
                     socket.emit(
                         "write",
                         options.port,
-                        "G91 Z" + kbdevent.move + ";\n"
+                        "G0 Z" + kbdevent.move + ";\n"
                     );
                     break;
                 case 131: // Media: Play (Top corner left)
