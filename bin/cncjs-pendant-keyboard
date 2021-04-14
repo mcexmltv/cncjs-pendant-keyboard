@@ -224,7 +224,7 @@ var createServer = function(options) {
                     socket.emit(
                         "write",
                         options.port,
-                        "G0 X" + kbdevent.move + ";\nG90\n"
+                        "G91\nG0 X" + kbdevent.move + ";\nG90\n"
                     );
                     break;
                 case 82: // arrow: up
