@@ -170,7 +170,6 @@ var createServer = function(options) {
             }
 
             // Process pressed key
-
             switch (kbdevent.extra) {
                 case 234: // vol+
                     socket.emit(
