@@ -111,6 +111,7 @@ git clone https://github.com/mcexmltv/cncjs-pendant-keyboard.git ~/.pendant
 cd .pendant
 
 
+
 # install 
   npm install
 
@@ -118,6 +119,17 @@ cd .pendant
 # pm2 start "node /home/pi/.pendant/bin/cncjs-pendant-keyboard --port /dev/ttyAMA0"
 pm2 start "sudo node /home/pi/.pendant/bin/cncjs-pendant-keyboard --port /dev/ttyUSB0"
 
+Adjust security so /dev/hidraw0 /dev/hidraw1   are accessible
+Normally, this is done by adding to /etc/udev/rules.d a file maybe named 50-usb-scale.conf with contents like this:
 
+Vendor 5383=x1507
+productId10260= x2814
+
+
+SUBSYSTEM=="usb", ATTR{idVendor}=="HEX1", ATTR{idProduct}=="HEX2", MODE="0666"
+SUBSYSTEM=="usb", ATTR{idVendor}=="1507", ATTR{idProduct}=="2814", MODE="0666"
+Where HEX1 and HEX2 are replaced with the vendor and product id respectively.
+
+from: https://askubuntu.com/questions/15570/configure-udev-to-change-permissions-on-usb-hid-device?fbclid=IwAR3O35HBP3QQGrW-MoXorliDL9enEeQPnggtJXxi2WL2mcgjIZtcVBroRlw
 
 
